@@ -4,17 +4,33 @@
 public class Aufgabe4 {
 
     private static boolean isMuenchhausenNumber(int number) {
-        // TODO: Implementieren Sie hier Ihre Lösung für die Angabe
-        return false; //Zeile kann geändert oder entfernt werden.
+        int internalNumber = number;
+        int sum = 0;
+        int currPos = 0;
+        for(int i = 1; internalNumber != 0; i++) {
+            currPos = ((internalNumber % (int)Math.pow(10,i)) / (int)Math.pow(10, i - 1));
+            internalNumber -= (currPos * (int)Math.pow(10, i-1));
+            sum += currPos != 0 ? (int)Math.pow(currPos, currPos) : 0;
+        }
+        return sum == number;
     }
 
     private static int countMuenchhausenNumbers(int start, int end) {
-        //TODO: Implementieren Sie hier Ihre Lösung für die Angabe
-        return -1; //Zeile kann geändert oder entfernt werden.
+        int sum = 0;
+        for(int i = start; i < end + 1; i++){
+            if(isMuenchhausenNumber(i)) {
+                sum++;
+            }
+        }
+        return sum; //Zeile kann geändert oder entfernt werden.
     }
 
     private static void printMuenchhausenNumbers(int start, int end) {
-        //TODO: Implementieren Sie hier Ihre Lösung für die Angabe
+        for(int i = start; i < end + 1; i++){
+            if(isMuenchhausenNumber(i)) {
+                System.out.print(i + " ");
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -37,6 +53,6 @@ public class Aufgabe4 {
         System.out.println();
         //**********************************************************************
 
-        //TODO: Testen Sie hier alle Methoden mit verschiedenen Inputs!
+        printMuenchhausenNumbers(1, 10000);
     }
 }
